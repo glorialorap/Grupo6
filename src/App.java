@@ -34,11 +34,32 @@ public class App {
         } while (op != 0);
     }//FIn del menu
     public void Alta(){
+        Scanner Teclado = new Scanner(System.in);
         System.out.println("Escriba el nombre del trabajador");
         String nom = scanner.next();
+        String nomPattern = "^[a-zA-Z\\s]+$";
+        if (nom.matches(nomPattern)) {
+            System.out.println("Nombre válido: " + nom);
+        } else {
+            System.out.println("Nombre inválido. Por favor, ingrese solo letras y espacios.");
+        }
+       
         System.out.println("Escriba el lugar donde trabajo");
         String lug = scanner.next();
-        System.out.println("Escriba el documento del trabajador");
+        try {
+            System.out.println("Escriba el documento del trabajador");
+            String doc= Teclado.nextLine();     
+            String docPattern = "^\\+(?:[0-9] ?){10,10}[0-9]$";
+            if (doc.matches(docPattern)) {
+                System.out.println("Número de teléfono válido");
+            } else {
+                System.out.println("Número de teléfono no válido");
+            }
+        }catch (Exception e) {//exepciones
+                System.out.println("Se produjo un error al leer el número de teléfono: " + e.getMessage());
+            }
+            
+        System.out.println("Escriba el documento del trabajador (10#ros)");
         int doc = scanner.nextInt();
         Empleado nuevoEmpleado = new Empleado(nom, lug, doc, new int[12], new int[12]);
         nuevoEmpleado.ingresarProduccion(); // Llamamos al método para ingresar la producción
